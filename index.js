@@ -70,4 +70,4 @@ async function run () {
   console.log('ended');
 }
 
-cron.schedule('* * * * *', run);
+cron.schedule('*/30 * * * *', run);
