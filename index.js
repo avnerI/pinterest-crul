@@ -9,65 +9,71 @@ const url5 = 'https://www.hometalk.com/8933087/how-to-upcycle-cheap-flower-pots?
 
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration));
 
+const browserPromise = puppeteer.launch({
+  args: [
+    '--no-sandbox'
+  ],
+});
+
 async function run () {
   console.log('started');
-  const browser = await puppeteer.launch();
+  const browser = await browserPromise;
   const context = await browser.createIncognitoBrowserContext();
 
   let page = await context.newPage();
   await page.goto(url);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url2);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url3);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url4);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url5);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
 
   page = await context.newPage();
   await page.goto(url);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url2);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url3);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
   page = await context.newPage();
   await page.goto(url4);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
 
   page = await context.newPage();
   await page.goto(url5);
-  await sleep(1500);
+  // await sleep(1500);
 //   await page.screenshot({ path: `screenshots/${new Date().getTime().toString()}.png` });
 
-  browser.close();
+  context.close();
   console.log('ended');
 }
 
-cron.schedule('*/30 * * * *', run);
+cron.schedule('* * * * *', run);
