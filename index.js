@@ -24,7 +24,7 @@ async function run () {
   let page;
 
   while (startTime + 30000 > new Date().getTime()) {
-    console.log(30 - ((new Date().getTime() - startTime) / 1000) )
+    console.log(30 - ((new Date().getTime() - startTime) / 1000))
     page = await context.newPage();
     const url = urls[Math.floor(Math.random() * urls.length)];
 
