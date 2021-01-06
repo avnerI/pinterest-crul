@@ -10,29 +10,31 @@ const urls = [
 ]
 // const sleep = duration => new Promise(resolve => setTimeout(resolve, duration));
 
+const browserPromise = puppeteer.launch({
+  args: [
+    '--no-sandbox'
+  ],
+});
+
 async function run () {
   console.log('started');
-  const browserPromise = puppeteer.launch({
-    args: [
-      '--no-sandbox'
-    ],
-  });
 
   const browser = await browserPromise;
   const context = await browser.createIncognitoBrowserContext();
   const startTime = new Date().getTime();
-  let page;
-
-  while (startTime + 30000 > new Date().getTime()) {
-    console.log(30 - ((new Date().getTime() - startTime) / 1000))
-    page = await context.newPage();
+  const page = await context.newPage();
+  let i = 0;
+  while (startTime + 60000 > new Date().getTime()) {
+    i++;
+    // console.log(60 - ((new Date().getTime() - startTime) / 1000))
     const url = urls[Math.floor(Math.random() * urls.length)];
 
     await page.goto(url);
   }
 
-  browser.close();
+  context.close();
+  console.log(i);
   console.log('ended');
 }
 
-cron.schedule('*/5 * * * *', run);
+cron.schedule('*/2 * * * *', run);
